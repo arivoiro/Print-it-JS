@@ -21,8 +21,16 @@ const slides = [
 const arrow_left = document.querySelector(".arrow_left");
 const arrow_right = document.querySelector(".arrow_right");
 
-arrow_left.addEventListener('click', function(){alert('Flèche gauche cliquée')});
-arrow_right.addEventListener('click', function(){alert('Flèche droite cliquée')});
+// Test des event listeners
+/* 
+arrow_left.addEventListener('click', function() {
+	alert('Flèche gauche cliquée')
+});
+
+arrow_right.addEventListener('click', function() {
+	alert('Flèche droite cliquée')
+}); 
+*/
 
 
 // Bullet points
@@ -37,3 +45,31 @@ for (let i = 0; i < slides.length; i++) {
 
 const dots = dotsContainer.querySelectorAll(".dot");
 dots[0].classList.add("dot_selected");
+
+
+// Image et texte du slider
+const bannerImg = slider.querySelector(".banner-img");
+const tagLine = slider.querySelector("p");
+
+let currentSlide = 0;
+
+// Fonction de mise à jour de l'affichage du slider
+function updateSlider() {
+  dots.forEach(dot => dot.classList.remove("dot_selected"));
+  dots[currentSlide].classList.add("dot_selected");
+
+  bannerImg.setAttribute("src", "./assets/images/slideshow/" + slides[currentSlide].image);
+  tagLine.innerHTML = slides[currentSlide].tagLine;
+}
+
+// Au clic sur la flèche droite
+arrow_right.addEventListener("click", function() {
+  currentSlide++;
+  updateSlider();
+});
+
+// Au clic sur la flèche gauche
+arrow_left.addEventListener("click", function() {
+  currentSlide--;
+  updateSlider();
+});
